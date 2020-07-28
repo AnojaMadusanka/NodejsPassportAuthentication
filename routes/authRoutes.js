@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 router.get('/login', async(req,res)=>{
-    res.render('login');
+    res.render('login', {user: req.user});
 });
 
 //auth with google
@@ -13,13 +13,14 @@ router.get('/google',
 router.get('/google/redirect', 
     passport.authenticate('google'), function(req, res) {
   // Successful authentication, redirect home.
-    req.logout();
-    res.render('home', { user:req.user });
+    //res.render('home', { user:req.user });
+    res.redirect('/profile');
 });
 
 //auth logout
 router.get('/logout', async(req, res)=>{
-    res.send('Logging out');
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports =router;

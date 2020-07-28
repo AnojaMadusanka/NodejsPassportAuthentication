@@ -20,7 +20,7 @@ router.post('/', async(req, res)=>{
 
     try{
         const newAlien = await alien.save()
-        res.json(newAlien);
+        res.status(200).json(newAlien);
     }catch(err) {
         res.send('Error' + err);
     }
@@ -31,7 +31,7 @@ router.get('/:id', async(req,res)=>{
         const alien = await Alien.findById(req.params.id);
         res.json(alien);
     }catch(err){
-        res.send('Error ' + err);
+        res.status(404).send('Error ' + err);
     }
 });
 
@@ -42,7 +42,7 @@ router.patch('/:id', async(req,res)=>{
         const a1 = await alien.save();
         res.json(a1);
     }catch (err){
-        res.send('Error' + err);
+        res.status(404).send('Error' + err);
     }
 });
 
